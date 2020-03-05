@@ -42,7 +42,7 @@ class Dataset():
         self.execute(query ,con=con)
     
 
-    def load_paths(conn, limit, json_path=False):
+    def load_paths(self, conn, limit, json_path=False):
         '''
         load image , mask , json paths from database.
         Args: conn(db_type), json_path(bool), limit(int) 
