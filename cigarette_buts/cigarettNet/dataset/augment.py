@@ -1,4 +1,5 @@
-
+import matplotlib.pyplot as plt
+import os
 
 class Augment():
     def __init__(self):
@@ -15,7 +16,6 @@ class Augment():
     bg_img = plt.imread(bg_image_path)
 
     positions = np.where(mask > 0)
-    merged = np.zeros((config.IMG_HEIGHT , config.IMG_WIDTH , 3))
     merged = bg_img.copy()
     for pos_x , pos_y in zip(positions[0] , positions[1]):
         merged[pos_x , pos_y] = img[pos_x , pos_y]
