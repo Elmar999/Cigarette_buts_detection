@@ -34,13 +34,13 @@ class Dataset():
         '''
         add image_path, mask_path, json_path to database paths table
         '''
-
-        p1 = '"{}"'.format(image_path)
-        p2 = '"{}"'.format(mask_path)
-        p3 = '"{}"'.format(json_path)
-        query = 'INSERT INTO ' + config.table_name +' VALUES(' +p1+','+p2+','+p3+')'
-        self.execute(query ,con=con)
-    
+        image_path = '"{}"'.format(image_path)
+        mask_path = '"{}"'.format(mask_path)
+        json_path = '"{}"'.format(json_path)
+        # query = 'INSERT INTO ' + config.table_name +' VALUES(' +p1+','+p2+','+p3+')'
+        query = f'INSERT INTO {config.table_name} VALUES({image_path}, {mask_path}, {json_path})'
+        execute(query ,con=con)
+        
 
     def load_paths(self, conn, limit, json_path=False):
         '''
