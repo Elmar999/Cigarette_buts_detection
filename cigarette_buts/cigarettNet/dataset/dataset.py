@@ -32,15 +32,19 @@ class Dataset():
 
     def add_Paths(self, image_path, mask_path, json_path, con):
         '''
-        add image_path, mask_path, json_path to database paths table
+        add image_path, mask_path, json_path without any bg_path to database paths table
         '''
         image_path = '"{}"'.format(image_path)
         mask_path = '"{}"'.format(mask_path)
         json_path = '"{}"'.format(json_path)
         # query = 'INSERT INTO ' + config.table_name +' VALUES(' +p1+','+p2+','+p3+')'
-        query = f'INSERT INTO {config.table_name} VALUES({image_path}, {mask_path}, {json_path})'
-        execute(query ,con=con)
-        
+        query = f'INSERT INTO {config.table_name} VALUES({image_path}, {mask_path}, {json_path}, NULL)'
+        self.execute(query, con=con)
+
+    def add_bg_path(self, bg_path, con):
+        bg_path = '"{}"'.format(bg_path)
+        query = f'INSERT INTO {config.table_name} VALUES(NULL, NULL, NULL, {bg_path})'
+        self.execute(query, con=con)        
 
     def load_paths(self, conn, limit, json_path=False):
         '''
@@ -54,7 +58,7 @@ class Dataset():
                 lst = []
                 for i in row:
                     lst.append(i)
-                paths.append(lst)        
+                paths.append(tuple(lst))        
             return paths
 
         cur = conn.cursor()
@@ -64,7 +68,7 @@ class Dataset():
             paths = _load(cur)
         else:
             db_query = query.query_not_json + 'Limit '+f'{limit}' 
-            cur.execute(query.query_not_json)
+            cur.execute(db_query)
             paths = _load(cur)
         return paths
             
