@@ -85,15 +85,15 @@ class Utils:
         grid = grid.astype(bool).astype(float)
 
         mask_file_name = os.path.join(config.MASK_DIRECTORY, filename.split('.')[0])
-        np.save(mask_file_name , grid)
+        np.save(mask_file_name, grid)
 
 
     def crop_images(directory_path):
         def _crop_images(image_path):
             img = plt.imread(image_path)
-            crop_img = img[:config.IMG_HEIGHT - 30, :] # [height , width]
+            crop_img = img[:config.IMG_HEIGHT - 30, :] 
             plt.imsave(image_path, crop_img)
-
+            
         '''
         for a given directory crop images from bottom to get rid of noise that we had because of camera.
         Args: directory_path(str)
