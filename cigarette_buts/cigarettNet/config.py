@@ -5,16 +5,18 @@ user = getpass.getuser()
 IMG_WIDTH = 256
 IMG_HEIGHT = 256
 nb_image = 3
+IMG_MAX_VAL = 255
 
 
 
 
 table_name = 'paths'
-DB_PATH = '/home/elmar/Cigarette_buts_detection/cigarette_buts/cigarettNet/buts.db'
-IMAGE_DIRECTORY = '/home/'+f'{user}'+'/Cigarette_buts_detection/cigarette_buts/out/image/buts'
-MASK_DIRECTORY = '/home/'+f'{user}'+'/Cigarette_buts_detection/cigarette_buts/out/mask'
-BACKGROUND_DIRECTORY = '/home/'+f'{user}'+'/Cigarette_buts_detection/cigarette_buts/out/image/bg'
-JSON_DIRECTORY = '/home/'+f'{user}'+'/Cigarette_buts_detection/cigarette_buts/out/image/js'
+OUT_PATH = '/home/'+f'{user}'+'/Cigarette_buts_detection/cigarette_buts/cigarettNet/out
+DB_PATH = os.path.join(OUT_PATH, 'buts.db')
+IMAGE_DIRECTORY = os.path.join(OUT_PATH, 'buts')
+MASK_DIRECTORY = os.path.join(OUT_PATH, 'mask')
+BACKGROUND_DIRECTORY = os.path.join(OUT_PATH, 'bg')
+JSON_DIRECTORY = os.path.join(OUT_PATH, 'js')
 
 
 UNET_CONFIG = {
