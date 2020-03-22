@@ -1,3 +1,4 @@
+import os
 import getpass
 user = getpass.getuser()
 
@@ -11,12 +12,12 @@ IMG_MAX_VAL = 255
 
 
 table_name = 'paths'
-OUT_PATH = '/home/'+f'{user}'+'/Cigarette_buts_detection/cigarette_buts/cigarettNet/out
-DB_PATH = os.path.join(OUT_PATH, 'buts.db')
-IMAGE_DIRECTORY = os.path.join(OUT_PATH, 'buts')
+OUT_PATH = '/home/'+f'{user}'+'/Cigarette_buts_detection/cigarette_buts/out'
+DB_PATH = '/home/elmar/Cigarette_buts_detection/cigarette_buts/cigarettNet/buts.db'
+IMAGE_DIRECTORY = os.path.join(OUT_PATH, 'image/buts')
 MASK_DIRECTORY = os.path.join(OUT_PATH, 'mask')
-BACKGROUND_DIRECTORY = os.path.join(OUT_PATH, 'bg')
-JSON_DIRECTORY = os.path.join(OUT_PATH, 'js')
+BACKGROUND_DIRECTORY = os.path.join(OUT_PATH, 'image/bg')
+JSON_DIRECTORY = os.path.join(OUT_PATH, 'image/js')
 
 
 UNET_CONFIG = {
