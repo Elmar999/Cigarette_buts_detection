@@ -158,7 +158,7 @@ def get_model(data, name="UNET-BASE", **params):
                         shuffle=False,
                         verbose=1)
 
-    model.load_weights(weight_path)
+    # model.load_weights(weight_path)
 
 
     return history, model
