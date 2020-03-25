@@ -4,6 +4,7 @@ import json
 import config
 from matplotlib.path import Path
 import os
+import cv2
 
 class Utils:
     def __init__(self, paths = None):
@@ -26,34 +27,34 @@ class Utils:
         return tr_ds
 
 
-    def resize_image(self, directory):
-        '''
-        resizes the images in directory according to dimensions in the config file.
-        Args: directory(str)
-        
-        '''
-        for filename in os.listdir(directory):
-            if filename.split('.')[1] == 'jpg':
-                filename = os.path.join(directory , filename)
-                img = cv2.imread(filename)
-                img = cv2.resize(img , (config.IMG_HEIGHT , config.IMG_WIDTH))
-                cv2.imwrite(filename , img)
+def resize_image(directory):
+    '''
+    resizes the images in directory according to dimensions in the config file.
+    Args: directory(str)
+    
+    '''
+    for filename in os.listdir(directory):
+        if filename.split('.')[1] == 'jpg':
+            filename = os.path.join(directory , filename)
+            img = cv2.imread(filename)
+            img = cv2.resize(img , (config.IMG_HEIGHT , config.IMG_WIDTH))
+            cv2.imwrite(filename , img)
 
     
-    def rename_files(file_directory):
-        ''' 
-        renames the file names in image directory in this format -> cgrt_0.jpg , cgrt_1.jpg .... 
-        Args: file_directory 
+def rename_files(file_directory):
+    ''' 
+    renames the file names in image directory in this format -> cgrt_0.jpg , cgrt_1.jpg .... 
+    Args: file_directory 
 
-        '''
-        i = 1
-        for filename in os.listdir(file_directory):
-            if filename.split('.')[1] == 'jpg':
-                filename = os.path.join(file_directory , filename)
-                renamed_file = os.path.join(file_directory , f'cgrt_{i}.jpg')
-                print(filename , "   " ,  renamed_file)
-                os.rename(filename , renamed_file)
-                i+=1
+    '''
+    i = 1
+    for filename in os.listdir(file_directory):
+        if filename.split('.')[1] == 'jpg':
+            filename = os.path.join(file_directory , filename)
+            renamed_file = os.path.join(file_directory , f'cgrt_{i}.jpg')
+            print(filename , "   " ,  renamed_file)
+            os.rename(filename , renamed_file)
+            i+=1
 
 def generate_mask(filename , json_file):
     '''

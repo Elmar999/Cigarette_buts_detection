@@ -18,6 +18,7 @@ IMAGE_DIRECTORY = os.path.join(OUT_PATH, 'image/buts')
 MASK_DIRECTORY = os.path.join(OUT_PATH, 'mask')
 BACKGROUND_DIRECTORY = os.path.join(OUT_PATH, 'image/bg')
 JSON_DIRECTORY = os.path.join(OUT_PATH, 'image/js')
+TEST_DIRECTORY = os.path.join(OUT_PATH, 'image/test')
 
 
 UNET_CONFIG = {
