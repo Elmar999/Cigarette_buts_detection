@@ -39,7 +39,7 @@ optional arguments:
 ### Usage example 
 **predict an image**
 ```sh
-$ python3 main.py --predict --model_path ../model/out/model.h5
+$ python3 main.py --predict --model_path ../model/out/model.h5 --img_path IMG_PATH
 ```
 
 
