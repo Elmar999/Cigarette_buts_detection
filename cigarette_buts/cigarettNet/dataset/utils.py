@@ -1,10 +1,10 @@
-import matplotlib.pyplot as plt
-import numpy as np
-import json
-import config
-from matplotlib.path import Path
 import os
 import cv2
+import json
+import config
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.path import Path
 
 class Utils:
     def __init__(self, paths = None):

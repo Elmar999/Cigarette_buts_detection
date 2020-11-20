@@ -1,6 +1,3 @@
-from .unet import *
-
-
 import os
 import sys
 import time
@@ -12,12 +9,12 @@ from collections import OrderedDict
 
 import numpy as np
 import tensorflow as tf
+from tensorflow.keras.metrics import AUC
+from tensorflow.keras import backend as K
 from tensorflow.keras import Input, Model
+from tensorflow.keras.callbacks import Callback
 from tensorflow.keras.layers import Lambda, Conv2D, Conv2DTranspose, MaxPooling2D, Dropout, concatenate, BatchNormalization
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau, TensorBoard
-from tensorflow.keras.metrics import AUC
-from tensorflow.keras.callbacks import Callback
-from tensorflow.keras import backend as K
 
 
 
@@ -107,7 +104,6 @@ def Upsample(x, dconvs, depth, kernel_size = [(3, 3), (5, 5), (5, 5), (7, 7)]):
         deconv = Conv2DTranspose(start_filter * np.power(2, i), kernel_size=kernel_size[i], strides=(2, 2), padding="same",
                                  kernel_initializer=k_init, bias_initializer=b_init, name=f'deconv_level_{i}')(x)
         
-        # deconv = UpSampling2D((2,2) , interpolation='bilinear')(x)
         x = concatenate([deconv, dconvs.pop()], name=f'concat_level_{i}')
         x = Dropout(drop_rate, seed=313)(x)
         x = Conv2D(start_filter * np.power(2, i),kernel_size=kernel_size[i], activation="relu", padding="same",

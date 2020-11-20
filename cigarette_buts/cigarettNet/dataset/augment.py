@@ -2,8 +2,8 @@ import os
 import random
 import config
 import numpy as np
-from albumentations.augmentations import transforms
 import matplotlib.pyplot as plt
+from albumentations.augmentations import transforms
 
 
 def augment(tr_ds, init_step, nb_augment, augment_method):

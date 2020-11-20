@@ -1,22 +1,12 @@
 import cv2
 import config
 import argparse
+from model.unet import *
+from dataset.utils import *
 from dataset.augment import *
 from dataset.dataset import Dataset
-from dataset.utils import *
 from model.predict import predict_img
-from model.unet import *
-
 from tensorflow.keras.models import load_model
-'''
-TODO: PREPROCESSING
-    - Generate masks from json files.
-    - Add image_path, mask_path, json_path and background path to database.
-    - Load them into list of tuples in the format of numpy array from database and shuffle.
-    - Augment images and append to list.
-    - Split into train and val data.
-    - Train images using U-net segmentation model.
-'''
 
 
 if __name__ == "__main__":
