@@ -1,5 +1,5 @@
 # Cigarette buts detection using U-Net segmentation
-Detection of Cigarette buts on the streets using U-net segmentation on Keras. The model will be integrated on Arduino robot.
+Detection of Cigarette buts on the streets using U-net segmentation on Keras.
 
 ### Introduction
 Cigarette buts on the street has been detected using U-net segmentation using [Keras](https://keras.io/) functional API. Different augmentation methods such as flip, rotate has been used in this repo using albumentations library.
