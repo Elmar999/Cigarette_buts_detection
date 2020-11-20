@@ -5,7 +5,11 @@ import random
 import numpy as np
 
 
-
+def augment(tr_ds, init_step, nb_augment, augment_method):
+    for count in range(nb_augment): 
+        train_ds.append(augment_method(train_ds[init_step+count][0], train_ds[init_step+count][1]))    
+    return train_ds
+    
 def generate_img_over_bg(image , mask , bg_image):
     '''
     project a segmented objects over background image.
