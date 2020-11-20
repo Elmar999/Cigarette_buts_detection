@@ -109,3 +109,32 @@ def crop_images(directory_path):
         _crop_images(image_path)
 
 
+def split_train_val(data):
+    '''
+    Splitting the data into train and validation set for u-net segmentation model.
+    Args: 
+        data
+    Returns:
+        (tr_ds, mask_ds), (val_ds, mask_val_ds)
+    '''
+    def _split(data, init_step, len_new):
+        x_ds, y_ds = list(), list()
+        for i in range(len_new):
+            x_ds.append(data[i + init_step][0])
+            y_ds.append(data[i + init_step][1])
+        y_ds = np.array(y_ds).reshape(len_new, 128, 128, 1)
+
+        return x_ds, y_ds
+        
+
+    data_len = len(data)
+    tr_len = int(data_len * 0.75)
+    val_len = data_len - tr_len
+
+    tr_ds, mask_ds = _split(data, 0, tr_len)
+    val_ds, val_mask_ds = _split(data, tr_len, val_len)
+    
+    return (tr_ds, mask_ds), (val_ds, val_mask_ds)
+
+
+

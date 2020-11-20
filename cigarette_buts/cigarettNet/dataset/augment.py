@@ -1,15 +1,16 @@
-import matplotlib.pyplot as plt
 import os
-from albumentations.augmentations import transforms
 import random
+import config
 import numpy as np
+from albumentations.augmentations import transforms
+import matplotlib.pyplot as plt
 
 
 def augment(tr_ds, init_step, nb_augment, augment_method):
     for count in range(nb_augment): 
-        train_ds.append(augment_method(train_ds[init_step+count][0], train_ds[init_step+count][1]))    
-    return train_ds
-    
+        tr_ds.append(augment_method(tr_ds[init_step+count][0], tr_ds[init_step+count][1]))    
+    return tr_ds
+
 def generate_img_over_bg(image , mask , bg_image):
     '''
     project a segmented objects over background image.
@@ -28,6 +29,17 @@ def generate_img_over_bg(image , mask , bg_image):
         merged[pos_x , pos_y] = image[pos_x , pos_y]
 
     return (merged, mask)
+
+def over_bg_augment(tr_ds, init_step, nb_augment):
+    bg_images = os.listdir(config.BACKGROUND_DIRECTORY)
+    nb_images = len(os.listdir(config.BACKGROUND_DIRECTORY))
+
+    for count in range(nb_augment):
+        rnd = random.randint(0, nb_images - 1)
+        bg_image = plt.imread(os.path.join(config.BACKGROUND_DIRECTORY, bg_images[rnd]))
+        tr_ds.append(generate_img_over_bg(tr_ds[init_step+count][0], tr_ds[init_step+count][1], bg_image))
+    return tr_ds
+
 
 def flip_augment(image, mask):
     '''
