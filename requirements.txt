@@ -1,6 +1,6 @@
 pandas==0.25.3
 scipy==1.4.1
-numpy==1.18.0
+numpy==1.22.0
 albumentations==0.4.3
 jupyter==1.0.0
 scikit-image==0.16.2
